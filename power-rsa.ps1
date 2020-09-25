@@ -1,10 +1,13 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 <#
-Power-RSA
+Verion 1.0
 
-PowerShell fork of easy-rsa
+By: Arjan Sturing
 
+PowerShell fork of the Windows OpenVPN 2.4.x Easy-RSA2 scripts.
+
+Automate the World! #PowerShell
 #>
 
 # Script variables
