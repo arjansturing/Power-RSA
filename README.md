@@ -11,7 +11,7 @@ The installation is as follows:
 - Create a new folder with the name: powerrsa.
 - Clone the files and folder in to the powerrsa folder.
 - Start PowerShell as Administrator.
-- Set the execution policy of PowerShell on at least "RemoteSigned" by using the command: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned.
+- Set the execution policy of PowerShell on at least "RemoteSigned" by using the command: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 - Start the Power-RSA script.
 - Enjoy!
 
