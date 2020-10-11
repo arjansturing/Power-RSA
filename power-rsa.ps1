@@ -134,14 +134,14 @@ Write-Host "You can find the files in the following directory: $env:HOME\pki" -F
 Start-Sleep 5
 }
 
-# Function for creating client certificate without password
+# Function for creating client certificate with password
 Function clientpwd {
 cls
 banner
 $env:KEY_CN=Read-Host "Enter Clientname"
 cd $env:HOME
 openssl req -days 3650 -new -keyout $env:KEY_DIR\$env:KEY_CN.key -out $env:KEY_DIR\$env:KEY_CN.csr -config $env:KEY_CONFIG -batch
-openssl ca -days 3650 -out $env:KEY_DIR\$env:KEY_CN.key -in $env:KEY_DIR\$env:KEY_CN.csr -config $env:KEY_CONFIG -batch
+openssl ca -days 3650 -out $env:KEY_DIR\$env:KEY_CN.crt -in $env:KEY_DIR\$env:KEY_CN.csr -config $env:KEY_CONFIG -batch
 cd $env:HOME
 cd $env:KEY_DIR
 Get-ChildItem *.old | foreach { Remove-Item -Path $_.FullName }
