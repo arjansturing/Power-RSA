@@ -2,11 +2,8 @@
 
 <#
 Verion 1.0
-
 By: Arjan Sturing
-
 PowerShell fork of the Windows OpenVPN 2.4.x Easy-RSA2 scripts.
-
 Automate the World! #PowerShell
 #>
 
@@ -152,7 +149,18 @@ Write-Host "You can find the files in the following directory: $env:HOME\pki" -F
 Start-Sleep 5
 }
 
-
+# Function for generating CRL / Revove certificate
+Function CRL
+{
+$keyname = Read-Host "Enter name of certificate to revoke (leave empty to generate CRL)"
+cd $env:HOME
+openssl ca -revoke $env:KEY_DIR\$keyname.crt -config $env:KEY_CONFIG -batch
+openssl ca -gencrl -out $env:KEY_DIR\crl.pem -config $env:KEY_CONFIG -batch
+cls
+Write-Host "Certifitcate: $keyname is revoked!" -ForeGroundColor Green
+Write-Host "Make sure that you add the path of crl.pem in the CRL option of the config file of the OpenVPN server!" -ForegroundColor Red
+Start-Sleep 10
+}
 # Script banner
 Function Banner {
 Clear-Host
@@ -182,6 +190,7 @@ Write-Host "3: Create Diffie-Hellman Certificate"
 Write-Host "4: Create TLS-Auth key"
 Write-Host "5: Create Create Client Certificate without password"
 Write-Host "6: Create Create Client Certificate with password"
+Write-Host "7: Generate CRL/Revoke Certificate"
 Write-Host "N: Create new PKI"
 Write-Host "Q: Quit"
 Write-Host ""
@@ -193,7 +202,7 @@ Write-Host ""
         
         write-host ""
         
-        $ok = $choice -match '^[123456nq]+$'
+        $ok = $choice -match '^[1234567nq]+$'
         if ( -not $ok) {
         cls 
         Write-Host "Wrong Choice!" -ForegroundColor Red
@@ -235,6 +244,11 @@ Write-Host ""
         "6"
         {
            clientpwd
+          
+        }
+                "7"
+        {
+           crl
           
         }
     }
