@@ -59,6 +59,7 @@ Start-Sleep 5
 Function createca {
 cls
 banner
+cd $env:HOME
 $env:KEY_CN="ca"
 $env:KEY_NAME=$env:KEY_CN
 openssl req -days 3650 -nodes -new -x509 -keyout $env:KEY_DIR\ca.key -out $env:KEY_DIR\ca.crt -config $env:KEY_CONFIG -batch 
