@@ -5,6 +5,8 @@ By: Arjan Sturing
 
 PowerShell fork of the Windows OpenVPN 2.4.x Easy-RSA2 scripts.
 
+Use this script at your own risk!
+
 The installation is as follows:
 
 - Go to the install dir of OpenVPN.
