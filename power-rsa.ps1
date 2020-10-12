@@ -170,12 +170,15 @@ Start-Sleep 2
 return}
 Else
 {}
+$env:KEY_CN = $keyname
+$env:KEY_NAME = $env:KEY_CN
 cd $env:HOME
 openssl ca -revoke $env:KEY_DIR\$keyname.crt -config $env:KEY_CONFIG -batch
 openssl ca -gencrl -out $env:KEY_DIR\crl.pem -config $env:KEY_CONFIG -batch
 Copy-Item $env:KEY_DIR\crl.pem -Destination $env:ovpndir\config\crl.pem -Force -ErrorAction SilentlyContinue
 cls
 Write-Host "Certifitcate: $keyname is revoked!" -ForeGroundColor Green
+
 Start-Sleep 5
 }
 # Script banner
