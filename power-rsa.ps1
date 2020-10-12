@@ -160,7 +160,7 @@ cd $env:ovpndir\powerrsa
 $keyname = Read-Host "Enter name of certificate to revoke (leave empty to generate CRL)"
 if ($keyname -eq [string]::empty){
 $env:KEY_CN = "TestCRLKEYDUMMY"
-$env:KEY_NAME = $env:KEY_CN
+$env:KEY_NAME = "TestCRLKEYDUMMY"
 Write-Host "No input, genertating a new CRL...." -ForegroundColor Green
 Start-Sleep 2
 cd $env:HOME
