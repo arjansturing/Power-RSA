@@ -150,16 +150,33 @@ Start-Sleep 5
 }
 
 # Function for generating CRL / Revove certificate
+# Function for generating CRL / Revoke certificate
 Function CRL
 {
+$env:ovpndir=(New-Object -ComObject WScript.Shell).RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OpenVPN\InstallLocation") | %{$_.Substring(0, $_.length - 1) }
+cd $env:ovpndir\powerrsa
+. .\variables.ps1
 $keyname = Read-Host "Enter name of certificate to revoke (leave empty to generate CRL)"
+if ($keyname -eq [string]::empty){
+$env:KEY_CN = "TestCRLKEYDUMMY"
+$env:KEY_NAME = $env:KEY_CN
+Write-Host "No input, genertating a new CRL...." -ForegroundColor Green
+Start-Sleep 2
+cd $env:HOME
+openssl ca -gencrl -out $env:KEY_DIR\crl.pem -config $env:KEY_CONFIG -batch
+cls
+Write-Host "CRL Generated!" -ForegroundColor Green
+Start-Sleep 2
+return}
+Else
+{}
 cd $env:HOME
 openssl ca -revoke $env:KEY_DIR\$keyname.crt -config $env:KEY_CONFIG -batch
 openssl ca -gencrl -out $env:KEY_DIR\crl.pem -config $env:KEY_CONFIG -batch
+Copy-Item $env:KEY_DIR\crl.pem -Destination $env:ovpndir\config\crl.pem -Force -ErrorAction SilentlyContinue
 cls
 Write-Host "Certifitcate: $keyname is revoked!" -ForeGroundColor Green
-Write-Host "Make sure that you add the path of crl.pem in the CRL option of the config file of the OpenVPN server!" -ForegroundColor Red
-Start-Sleep 10
+Start-Sleep 5
 }
 # Script banner
 Function Banner {
