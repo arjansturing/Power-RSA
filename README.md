@@ -19,4 +19,4 @@ The installation is as follows:
 
 Automate the World! #PowerShell
 
-//This script is tested on Windows 10 2004 with PowerShell version 5.1
+//This script is tested on Windows 10 (Build: 2004) with PowerShell version 5.1
