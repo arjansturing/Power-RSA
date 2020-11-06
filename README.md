@@ -3,7 +3,7 @@ Verion 1.0
 
 By: Arjan Sturing
 
-PowerShell fork of the Windows OpenVPN 2.4.x Easy-RSA2 scripts.
+PowerShell fork of the Windows OpenVPN 2.4.x Easy-RSA2 scripts, Power RSA 2.0 for OpenVPN 2.5x can be found here: https://github.com/arjansturing/Power-RSA-2.0/
 
 Use this script at your own risk!
 
